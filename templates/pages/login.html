@@ -1,0 +1,67 @@
+{% extends "layouts/primary.html" %}
+
+{% block title %} {% endblock %}
+
+{% block styles %} {% endblock %}
+
+{% block content %}
+<main>
+    <form action="" id="login">
+        <div>
+            <label for="email">Email address</label>
+            <input type="text" class="form-field" id="email" name="email">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" class="form-field" id="password" name="password">
+        </div>
+        <button type="submit" id="btn">Login</button>
+    </form>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    on("submit", "#login", function (e) {
+        e.preventDefault()
+        let formData = new FormData(e.target)
+        let email = document.querySelector("#email").value;
+        let password = document.querySelector("#password").value;
+        let btn = document.querySelector("#btn").value;
+
+        formData.append("email", email)
+        formData.append("password", password)
+
+
+        if (email == "") {
+            alert("Email is required!")
+        } else if (password == "") {
+            alert("Password is required!")
+        } else {
+            btn.innerText = "Loading..."
+            btn.disabled = true
+            fetch(ApiUrl("login"), {
+                method: "POST",
+                body: JSON.stringify({
+                    email, password
+                }),
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                }),
+
+            }).then((response) => {
+                return response.json()
+            }).then((response) => {
+                location.reload()
+                console.log(response);
+
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                btn.innerText = "Login"
+                btn.disabled = false
+            })
+        }
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #323c55;
+}
+
+.app {
+  .boxed {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .app-top {
+      padding-top: 40px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .time {
+        font-size: 10rem;
+        font-weight: 700;
+        margin: 0;
+        margin-bottom: 20px;
+      }
+      .date {
+        margin: 0;
+        margin-bottom: 20px;
+        font-size: 2rem;
+      }
+      .timezone {
+        margin: 0;
+        margin-bottom: 20px;
+        font-size: 1rem;
+      }
+      .details {
+        background-color: #3d4d73;
+        padding: 20px;
+        width: 300px;
+        border-radius: 15px;
+      }
+    }
+    .app-bottom {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding-bottom: 40px;
+      margin-top: auto;
+      user-select: none;
+      overflow-x: auto;
+      .item {
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 15px;
+        border: 3px solid transparent;
+        .day {
+          padding: 5px 10px;
+          background-color: #3c4f78;
+          border-radius: 50px;
+          color: white;
+          font-size: 14px;
+          font-weight: 600;
+        }
+        .image {
+          width: 80px;
+        }
+        .temperature {
+          font-weight: 600;
+          font-size: 14px;
+          color: white;
+          margin-bottom: 10px;
+          text-wrap:nowrap;
+        }
+      }
+      .active {
+        border-color: #788ec5;
+      }
+    }
+  }
+}

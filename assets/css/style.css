@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #323c55;
+}
+
+.app .boxed {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.app .boxed .app-top {
+  padding-top: 40px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.app .boxed .app-top .time {
+  font-size: 10rem;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.app .boxed .app-top .date {
+  margin: 0;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+.app .boxed .app-top .timezone {
+  margin: 0;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+.app .boxed .app-top .details {
+  background-color: #3d4d73;
+  padding: 20px;
+  width: 300px;
+  border-radius: 15px;
+}
+.app .boxed .app-bottom {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding-bottom: 40px;
+  margin-top: auto;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  overflow-x: auto;
+}
+.app .boxed .app-bottom .item {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 15px;
+  border: 3px solid transparent;
+}
+.app .boxed .app-bottom .item .day {
+  padding: 5px 10px;
+  background-color: #3c4f78;
+  border-radius: 50px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+.app .boxed .app-bottom .item .image {
+  width: 80px;
+}
+.app .boxed .app-bottom .item .temperature {
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  margin-bottom: 10px;
+  text-wrap: nowrap;
+}
+.app .boxed .app-bottom .active {
+  border-color: #788ec5;
+}/*# sourceMappingURL=style.css.map */
