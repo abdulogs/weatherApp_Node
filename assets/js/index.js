@@ -5,6 +5,7 @@ function on(evt, selector, callback) {
     }
   });
 }
+
 function ApiUrl(name) {
   return `${window.location.origin}/api/${name}`;
 }

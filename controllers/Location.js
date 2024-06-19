@@ -18,7 +18,9 @@ class LocationApi {
     try {
       const location = await Location.findByPk(id);
       if (!location) {
-        response.status(404).send({ msg: "Record not found!" });
+        response.status(404).send({
+          msg: "Record not found!"
+        });
       } else {
         response.json(location);
       }
@@ -27,7 +29,10 @@ class LocationApi {
     }
   }
   static async create(request, response) {
-    const { name, is_active } = request.body;
+    const {
+      name,
+      is_active
+    } = request.body;
     try {
       const data = await Location.create({
         name: name,
@@ -41,13 +46,21 @@ class LocationApi {
   }
   static async update(request, response) {
     const id = request.params.id;
-    const { name, is_active } = request.body;
+    const {
+      name,
+      is_active
+    } = request.body;
     try {
       const location = await Location.findByPk(id);
       if (!location) {
-        response.status(404).send({ msg: "Record not found!" });
+        response.status(404).send({
+          msg: "Record not found!"
+        });
       } else {
-        let data = await location.update({ name, is_active });
+        let data = await location.update({
+          name,
+          is_active
+        });
         response.send(data);
       }
     } catch (error) {
@@ -59,10 +72,14 @@ class LocationApi {
     try {
       const location = await Location.findByPk(id);
       if (!location) {
-        response.status(404).send({ msg: "Record not found!" });
+        response.status(404).send({
+          msg: "Record not found!"
+        });
       } else {
         await location.destroy();
-        response.send({ msg: "1 record deleted successfully" });
+        response.send({
+          msg: "1 record deleted successfully"
+        });
       }
     } catch (error) {
       response.status(500).send(error);

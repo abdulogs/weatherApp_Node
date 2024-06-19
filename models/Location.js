@@ -1,10 +1,11 @@
-import { DataTypes } from "sequelize";
+import {
+  DataTypes
+} from "sequelize";
 import sequelize from "../config/db.js";
 import User from "./User.js";
- 
+
 const Location = sequelize.define(
-  "Location",
-  {
+  "Location", {
     name: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -22,11 +23,12 @@ const Location = sequelize.define(
         key: "id",
       },
     },
-  },
-  {
+  }, {
     tableName: "locations",
     createdAt: "created_at",
     updatedAt: "updated_at",
+    charset: "utf8mb4",
+    collate: "utf8mb4_unicode_ci",
   }
 );
 
