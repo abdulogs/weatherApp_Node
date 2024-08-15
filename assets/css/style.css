@@ -9,7 +9,7 @@ body {
   font-family: "Inter", sans-serif;
   padding: 0;
   margin: 0;
-  background-color: #323c55;
+  background-color: #18233f;
 }
 
 .app .boxed {
@@ -19,46 +19,168 @@ body {
   flex-direction: column;
   height: 100vh;
 }
+@media (max-width: 540px) {
+  .app .boxed {
+    width: 95%;
+  }
+}
 .app .boxed .app-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+.app .boxed .app-top .logo {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+.app .boxed .app-top .menus {
+  color: white;
+}
+.app .boxed .app-top .menus a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 10px;
+  display: inline-block;
+}
+.app .boxed .app-middle {
   padding-top: 40px;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.app .boxed .app-top .time {
-  font-size: 10rem;
+@media (max-width: 540px) {
+  .app .boxed .app-middle {
+    flex-direction: column;
+  }
+}
+.app .boxed .app-middle .time {
+  font-size: 8rem;
   font-weight: 700;
   margin: 0;
   margin-bottom: 20px;
 }
-.app .boxed .app-top .date {
+@media (max-width: 540px) {
+  .app .boxed .app-middle .time {
+    font-size: 2rem;
+  }
+}
+.app .boxed .app-middle .date {
   margin: 0;
   margin-bottom: 20px;
   font-size: 2rem;
 }
-.app .boxed .app-top .timezone {
+@media (max-width: 540px) {
+  .app .boxed .app-middle .date {
+    font-size: 1rem;
+  }
+}
+.app .boxed .app-middle .timezone {
   margin: 0;
   margin-bottom: 20px;
   font-size: 1rem;
 }
-.app .boxed .app-top .details {
-  background-color: #3d4d73;
+.app .boxed .app-middle .details {
+  background-color: #6f8ac9;
+  padding: 5px 20px;
+  width: 250px;
+  border-radius: 5px;
+}
+.app .boxed .app-middle .details #icon {
+  display: inline-block;
+  width: 40px;
+}
+.app .boxed .app-middle .details .detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+}
+.app .boxed .app-middle .form {
+  background-color: white;
+  margin: auto;
   padding: 20px;
-  width: 300px;
-  border-radius: 15px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  border-radius: 10px;
+  width: 350px;
+  color: #18233f;
+}
+.app .boxed .app-middle .form .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.app .boxed .app-middle .form .form-group label {
+  font-size: 12px;
+  font-weight: bold;
+}
+.app .boxed .app-middle .form .form-group .form-field {
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #b9c1d3;
+}
+.app .boxed .app-middle .form .btn {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  color: white;
+  outline: none;
+  border: none;
+}
+.app .boxed .app-middle .locations {
+  margin: auto;
+}
+.app .boxed .app-middle .locations .list {
+  margin: 0;
+  padding: 0;
+  margin-top: 40px;
+}
+.app .boxed .app-middle .locations .list .list-item {
+  display: block;
+  width: 100%;
+  padding: 10px;
 }
 .app .boxed .app-bottom {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  display: flex;
   padding-bottom: 40px;
   margin-top: auto;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  overflow-y: hidden;
   overflow-x: auto;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+.app .boxed .app-bottom::-webkit-scrollbar {
+  height: 10px;
+}
+.app .boxed .app-bottom::-webkit-scrollbar-track {
+  background: #b9c1d3;
+}
+.app .boxed .app-bottom::-webkit-scrollbar-thumb {
+  background: #232a3c;
+}
+.app .boxed .app-bottom::-webkit-scrollbar-thumb:hover {
+  background: #4a5e8f;
 }
 .app .boxed .app-bottom .item {
+  width: 200px;
+  min-height: 180px;
   padding: 20px;
   text-align: center;
   display: flex;
@@ -73,19 +195,28 @@ body {
   background-color: #3c4f78;
   border-radius: 50px;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
 }
 .app .boxed .app-bottom .item .image {
-  width: 80px;
+  width: 60px;
 }
 .app .boxed .app-bottom .item .temperature {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   color: white;
   margin-bottom: 10px;
   text-wrap: nowrap;
 }
 .app .boxed .app-bottom .active {
   border-color: #788ec5;
+}
+.app .boxed .select-location {
+  position: fixed;
+  right: 50%;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  width: 200px;
+  padding: 6px 5px;
 }/*# sourceMappingURL=style.css.map */

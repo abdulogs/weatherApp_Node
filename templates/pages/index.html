@@ -7,15 +7,20 @@
 {% block content %}
 <main class="app">
     <div class="boxed">
-        <section class="app-top">
+        {% include "components/navbar.html" %}
+        <section class="app-middle">
             <div class="col">
                 <h3 class="time" id="time">--:-- <span id="am-pm">--</span></h3>
                 <h4 class="date" id="date">--, --</h4>
-                <h6 class="timezone" id="timezone">--/--</h6>
+                <h6 class="timezone">
+                    <span id="place">--/--</span> - <span id="timezone">--/--</span> - <span id="lon">--</span>, <span
+                        id="lat">--</span>
+                </h6>
             </div>
             <div class="details" id="today-details">
-                <h3 class="detail"><b>Longitude</b><span id="longitude">--</span></h3>
-                <h3 class="detail"><b>Latitude</b><span id="latitude">--</span></h3>
+                <img id="icon" src="">
+                <h3 class="detail"><b>Day</b><span id="today">--</span></h3>
+                <h3 class="detail"><b>Temperature</b><span id="temp">--</span></h3>
                 <h3 class="detail"><b>Humidity</b><span id="humidity">--</span></h3>
                 <h3 class="detail"><b>Pressure</b><span id="pressure">--</span></h3>
                 <h3 class="detail"><b>Wind Speed</b><span id="wind_speed">--</span></h3>
@@ -23,174 +28,41 @@
                 <h3 class="detail"><b>Sunset</b><span id="sunset">--</span></h3>
             </div>
         </section>
-        <section class="app-bottom" id="weather-forecast">
-            <div class="item active">
-                <div class="day">Monday</div>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" class="image">
-                <div class="temperature">Night - 0.0&#176; C</div>
-                <div class="temperature">Day - 0.0&#176; C</div>
-            </div>
-            <div class="item">
-                <div class="day">Tuesady</div>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="image">
-                <div class="temperature">Night - 0.0&#176; C</div>
-                <div class="temperature">Day - 0.0&#176; C</div>
-            </div>
-            <div class="item">
-                <div class="day">Wednesday</div>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="image">
-                <div class="temperature">Night - 0.0&#176; C</div>
-                <div class="temperature">Day - 0.0&#176; C</div>
-            </div>
-            <div class="item">
-                <div class="day">Thursday</div>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="image">
-                <div class="temperature">Night - 0.0&#176; C</div>
-                <div class="temperature">Day - 0.0&#176; C</div>
-            </div>
-            <div class="item">
-                <div class="day">Friday</div>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="image">
-                <div class="temperature">Night - 0.0&#176; C</div>
-                <div class="temperature">Day - 0.0&#176; C</div>
-            </div>
-            <div class="item">
-                <div class="day">Saturday</div>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="image">
-                <div class="temperature">Night - 0.0&#176; C</div>
-                <div class="temperature">Day - 0.0&#176; C</div>
-            </div>
-            <div class="item">
-                <div class="day">Sunday</div>
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="image">
-                <div class="temperature">Night - 0.0&#176; C</div>
-                <div class="temperature">Day - 0.0&#176; C</div>
-            </div>
-        </section>
+        <section class="app-bottom" id="weekly-forecast"></section>
+        {% if request.session.auth %}
+        <select name="locations" id="locations" class="select-location"></select>
+        {% endif %}
     </div>
 </main>
-
-
-
-{% if request.session.user_id %}
-<a href="/logout">Logout</a>
-{% else %}
-No
-{% endif %}
-
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
+{% if request.session.auth %}
 <script>
-    const time_el = document.querySelector("#time");
-    const date_el = document.querySelector("#date");
-    const items = document.querySelector("#today-details");
-    const timezone = document.querySelector("#timezone");
-    const country = document.querySelector("#country");
-    const weatherForecastEl = document.querySelector("#weather-forecast");
-    const currentTempEl = document.querySelector("#current-temp");
-
-    const days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-    ];
-    const months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-    ];
-
-    setInterval(() => {
-        const time = new Date();
-        const month = time.getMonth();
-        const date = time.getDate();
-        const day = time.getDay();
-        const hour = time.getHours();
-        const format = hour >= 13 ? hour % 12 : hour;
-        const minutes = time.getMinutes();
-        const ampm = hour >= 12 ? "PM" : "AM";
-
-        time_el.innerHTML =
-            (format < 10 ? "0" + format : format) +
-            ":" +
-            (minutes < 10 ? "0" + minutes : minutes) +
-            " " +
-            `<span id="am-pm">${ampm}</span>`;
-
-        date_el.innerHTML = days[day] + ", " + date + " " + months[month];
-    }, 1000);
-
-    function getWeatherData(name) {
-        const API_KEY = "49cc8c821cd2aff9af04c9f98c36eb74";
-
-        fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${name}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
-        )
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                showWeatherData(data);
-            });
-    }
-    getWeatherData("Lahore");
-
-    function showWeatherData(data) {
-        let { current, daily, lat, lon, timezone } = data;
-        let { temp, humidity, wind_speed, sunrise, sunset } = current;
-        let records = [];
-
-        document.querySelector("#humidity").textContent = humidity;
-        document.querySelector("#pressure").textContent = pressure;
-        document.querySelector("#sunrise").textContent = window
-            .moment(sunrise * 1000)
-            .format("HH:mm a");
-        document.querySelector("#sunset").textContent = window
-            .moment(sunset * 1000)
-            .format("HH:mm a");
-        document.querySelector("#wind_speed").textContent = wind_speed;
-        document.querySelector("#timezone").textContent = timezone;
-        document.querySelector("#longitude").textContent = lon + "E";
-        document.querySelector("#latitude").textContent = lat + "N ";
-
-        daily.forEach((day, idx) => {
-            if (idx == 0) {
-                records.push({
-                    image: `http://openweathermap.org/img/wn//${day.weather[0].icon}@4x.png`,
-                    day: window.moment(day.dt * 1000).format("dddd"),
-                    day_temp: day.temp.day,
-                    night_temp: day.temp.night,
-                    active: true,
-                });
+    function listing() {
+        let output = document.querySelector("#locations")
+        fetch(ApiUrl("locations")).then((response) => {
+            return response.json()
+        }).then((data) => {
+            console.log(data);
+            if (data.length != 0) {
+                let template = `<option value="">Select</option>`
+                data.forEach((item) => {
+                    template += `<option value="${item.name}">${item.name}</option>`
+                })
+                output.innerHTML = template
             } else {
-                records.push({
-                    image: `http://openweathermap.org/img/wn//${day.weather[0].icon}@4x.png`,
-                    day: window.moment(day.dt * 1000).format("dddd"),
-                    day_temp: day.temp.day,
-                    night_temp: day.temp.night,
-                    active: false,
-                });
+                output.innerHTML = `<option value="">No Locations</option>`
             }
-        });
-
-        console.log(records);
+        })
     }
+    listing()
 
+    on("change", "#locations", (e) => {
+        let location = e.target.value
+        get_location_weather(location)
+    })
 </script>
-
+{% endif %}
+<script src="static/js/weather.js"></script>
 {% endblock %}

@@ -5,7 +5,7 @@ class LocationApi {
     try {
       const locations = await Location.findAll({
         where: {
-          created_by: request.session.user_id ?? null,
+          created_by: request.session.auth.id ?? null,
         },
       });
       response.json(locations);
@@ -37,7 +37,7 @@ class LocationApi {
       const data = await Location.create({
         name: name,
         is_active: is_active,
-        created_by: request.session.user_id,
+        created_by: request.session.auth.id,
       });
       response.status(201).send(data);
     } catch (error) {

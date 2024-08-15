@@ -5,26 +5,31 @@
 {% block styles %} {% endblock %}
 
 {% block content %}
-<main>
-    <form action="" id="signup">
-        <div>
-            <label for="firstname">First Name</label>
-            <input type="text" class="form-field" id="firstname" name="firstname">
-        </div>
-        <div>
-            <label for="lastname">First Name</label>
-            <input type="text" class="form-field" id="lastname" name="lastname">
-        </div>
-        <div>
-            <label for="email">Email address</label>
-            <input type="text" class="form-field" id="email" name="email">
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" class="form-field" id="password" name="password">
-        </div>
-        <button type="submit" id="btn">Signup</button>
-    </form>
+<main class="app">
+    <div class="boxed">
+        {% include "components/navbar.html" %}
+        <section class="app-middle">
+            <form action="" id="signup" class="form">
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-field" id="firstname" name="firstname">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-field" id="lastname" name="lastname">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="text" class="form-field" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-field" id="password" name="password">
+                </div>
+                <button type="submit" class="btn" id="btn">Signup</button>
+            </form>
+        </section>
+    </div>
 </main>
 {% endblock %}
 
@@ -66,10 +71,11 @@
             }).then((response) => {
                 return response.json()
             }).then((response) => {
-                console.log(response);
-
-            }).catch((error) => {
-                console.log(error);
+                if(response?.token){
+                    window.location = "/login/"
+                } else {
+                    alert(response.msg)
+                }
             }).finally(() => {
                 btn.innerText = "Signup"
                 btn.disabled = false

@@ -2,7 +2,7 @@ import express from "express";
 import { isloggedIn, isloggedOut } from "../middlewares/auth.js";
 const route = express.Router();
 
-route.get("/", async (request, response) => {
+route.get("/", isloggedOut, async (request, response) => {
   response.render("pages/index");
 });
 route.get("/signup", isloggedIn, async (request, response) => {

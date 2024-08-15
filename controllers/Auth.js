@@ -81,7 +81,7 @@ class Auth {
         });
       }
 
-      request.session.user_id = user.id;
+      request.session.auth = user;
 
       jwt.sign({
           user: {

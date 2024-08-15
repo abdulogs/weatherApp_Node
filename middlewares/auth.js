@@ -22,7 +22,7 @@ export default async (req, res, next) => {
 };
 
 async function isloggedIn(request, resposne, next) {
-  if (request.session.user_id == undefined) {
+  if (request.session.auth == undefined) {
     next();
   } else {
     resposne.redirect("/");
@@ -30,7 +30,7 @@ async function isloggedIn(request, resposne, next) {
 }
 
 async function isloggedOut(request, resposne, next) {
-  if (request.session.user_id == undefined) {
+  if (request.session.auth == undefined) {
     resposne.redirect("/login");
   } else {
     next();

@@ -1,0 +1,13 @@
+<section class="app-top">
+    <a href="/" class="logo">WeatherApp</a>
+    <div class="menus">
+        {% if not request.session.auth %}
+        <a href="/login/" class="btn">Login</a>
+        <a href="/signup/" class="btn">Signup</a>
+        {% else %}
+        <a href="/locations/" class="btn">Locations</a> -
+        <b>{{ request.session.auth.firstname }} {{ request.session.auth.lastname }}</b>
+       - <a href="/logout/" class="btn">Logout</a>
+        {% endif %}
+    </div>
+</section>
